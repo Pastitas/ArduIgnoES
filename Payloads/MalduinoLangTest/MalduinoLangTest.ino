@@ -1,5 +1,5 @@
 /*
- * Generated with <3 by Dckuino.js, an open source project !     Aa
+ * Generated with <3 by Dckuino.js, an open source project !     ABCDXYZabcdxyz
  * 
  */
 
@@ -27,9 +27,9 @@ void setup()
   // Begining the Keyboard stream
   Keyboard.begin();
 
-  Keyboard.print("A");
-  Keyboard.print("[");
-  Keyboard.print("a");
+  Keyboard.print("ABCDXYZ");
+  Keyboard.print(" [] ");
+  Keyboard.print("abcdxyz");
 
   // Wait 500ms
   delay(500);

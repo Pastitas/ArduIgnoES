@@ -80,7 +80,7 @@ extern
 const uint8_t _asciimap[128] PROGMEM;
 
 #define SHIFT 0x80
-#define R_ALT 0x98
+#define R_ALT 0xC0
 const uint8_t _asciimap[128] =
 {
 	0x00,             // NUL
@@ -224,7 +224,9 @@ uint8_t USBPutChar(uint8_t c);
 size_t Keyboard_::press(uint8_t k)
 {
 	uint8_t i;
-	Serial.print(k);
+
+	Serial.print('\n');
+	Serial.print(k, HEX);
 	Serial.print('\n');
 
 	if (k >= 136) {			// it's a non-printing key (not a modifier)
@@ -234,9 +236,6 @@ size_t Keyboard_::press(uint8_t k)
 		k = 0;
 	} else {				// it's a printing key
 		k = pgm_read_byte(_asciimap + k);
-
-		//Serial.print(_asciimap[k]);
-		Serial.print('\n');
 		Serial.print(k);
 		Serial.print('\n');
 
@@ -247,16 +246,23 @@ size_t Keyboard_::press(uint8_t k)
 		if (k & 0x80) {						// it's a capital letter or other character reached with shift
 			_keyReport.modifiers |= 0x02;	// the left shift modifier
 			k &= 0x7F;
+
+			Serial.print("S");
+			Serial.print('\n');
+			Serial.print(k, HEX);
+			Serial.print('\n');
 		}
-		if (k & 0x98){ 		//it's a AltGr Modified key
+		if (k & 0xC0){ 		//it's a AltGr Modified key
+			
 			Serial.print("A");
-			Serial.print(k);
+			Serial.print('\n');
+			Serial.print(k, HEX);
 			Serial.print('\n');
 
 			_keyReport.modifiers |= 0x40;
-			k &=0x7F;
+			k &=0x33F;
 		}
-
+	
 	}
 
 	// Add k to the key report only if it's not already present
@@ -300,9 +306,9 @@ size_t Keyboard_::release(uint8_t k)
 			_keyReport.modifiers &= ~(0x02);	// the left shift modifier
 			k &= 0x7F;
 		}
-		if (k & 0x98){
+		if (k & 0xC0){
 			_keyReport.modifiers &= ~(0x40);
-			k &=0x7F;
+			k &=0x3F;
 		}
 	
 	}
