@@ -1,5 +1,5 @@
 /*
- * Generated with <3 by Dckuino.js, an open source project !     ABCDXYZabcdxyz
+ * Generated with <3 by Dckuino.js, an open source project !
  * 
  */
 
@@ -18,18 +18,18 @@ void setup()
   Serial.begin(9600);
   
   pinMode(3, INPUT_PULLUP);
-  while(digitalRead(3) == LOW){
-      delay(1000);
+  while(digitalRead(3) != LOW){
+      delay(500);
       Serial.print("Looping");
       Serial.print('\n');
   }
 
   // Begining the Keyboard stream
   Keyboard.begin();
-
-  Keyboard.print("ABCDXYZ");
-  Keyboard.print(" [] ");
-  Keyboard.print("abcdxyz");
+/*
+  Keyboard.print("A");
+  Keyboard.print("[");
+  Keyboard.print("a");
 
   // Wait 500ms
   delay(500);
@@ -38,7 +38,7 @@ void setup()
   Keyboard.end();
   Serial.end();
 }
-/*
+*/
   Keyboard.press(KEY_LEFT_GUI);
   Keyboard.press('r');
   Keyboard.releaseAll();
@@ -84,8 +84,8 @@ void setup()
   Keyboard.end();
   Serial.end();
 }
-*/
-/* Unused endless loop                ¥        */
+
+/* Unused endless loop                      */
 void loop() {}
 
 

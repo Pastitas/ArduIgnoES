@@ -80,7 +80,7 @@ extern
 const uint8_t _asciimap[128] PROGMEM;
 
 #define SHIFT 0x80
-#define R_ALT 0xC0
+#define R_ALT 0x40
 const uint8_t _asciimap[128] =
 {
 	0x00,             // NUL
@@ -236,24 +236,15 @@ size_t Keyboard_::press(uint8_t k)
 		k = 0;
 	} else {				// it's a printing key
 		k = pgm_read_byte(_asciimap + k);
-		Serial.print(k);
+		Serial.print(k,HEX);
 		Serial.print('\n');
 
 		if (!k) {
 			setWriteError();
 			return 0;
 		}
-		if (k & 0x80) {						// it's a capital letter or other character reached with shift
-			_keyReport.modifiers |= 0x02;	// the left shift modifier
-			k &= 0x7F;
+    if (k & R_ALT){ 		//it's a AltGr Modified key
 
-			Serial.print("S");
-			Serial.print('\n');
-			Serial.print(k, HEX);
-			Serial.print('\n');
-		}
-		if (k & 0xC0){ 		//it's a AltGr Modified key
-			
 			Serial.print("A");
 			Serial.print('\n');
 			Serial.print(k, HEX);
@@ -262,7 +253,17 @@ size_t Keyboard_::press(uint8_t k)
 			_keyReport.modifiers |= 0x40;
 			k &=0x33F;
 		}
-	
+		else if (k & SHIFT) {						// it's a capital letter or other character reached with shift
+			_keyReport.modifiers |= 0x02;	// the left shift modifier
+			k &= 0x7F;
+
+			Serial.print("S");
+			Serial.print('\n');
+			Serial.print(k, HEX);
+			Serial.print('\n');
+		}
+
+
 	}
 
 	// Add k to the key report only if it's not already present
@@ -277,7 +278,7 @@ size_t Keyboard_::press(uint8_t k)
 				break;
 			}
 		}
-		if (i == 6){ 
+		if (i == 6){
 			setWriteError();
 			return 0;
 		}
@@ -302,15 +303,16 @@ size_t Keyboard_::release(uint8_t k)
 		if (!k) {
 			return 0;
 		}
-		if (k & 0x80) {							// it's a capital letter or other character reached with
-			_keyReport.modifiers &= ~(0x02);	// the left shift modifier
-			k &= 0x7F;
-		}
-		if (k & 0xC0){
+    if (k & R_ALT){
 			_keyReport.modifiers &= ~(0x40);
 			k &=0x3F;
 		}
-	
+		else if (k & SHIFT) {							// it's a capital letter or other character reached with
+			_keyReport.modifiers &= ~(0x02);	// the left shift modifier
+			k &= 0x7F;
+		}
+
+
 	}
 
 	// Test the key report to see if k is present.  Clear it if it exists.
