@@ -56,7 +56,7 @@ void setup()
   Keyboard.print("I will learn to lock my BOSS computer .");
   
   typeKey(KEY_RETURN);
-
+  
   Keyboard.print("TEST () {} [] | # ~ @  !  -_ ;, :. % & / = ? * ^  > < 1 ");
 
   typeKey(KEY_RETURN);

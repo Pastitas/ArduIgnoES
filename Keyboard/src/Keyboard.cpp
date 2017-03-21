@@ -144,9 +144,9 @@ const uint8_t _asciimap[128] =
 	0x26,          // 9
 	0x37|SHIFT,      // :
 	0x36|SHIFT,          // ;
-	0x31	,      // <
+	0x2c	,      // <
 	0x27|SHIFT,          // =
-	0x31|SHIFT,      // >
+	0x2c|SHIFT,      // >
 	0x2d|SHIFT,      // ?
 	0x1f|R_ALT,      // @
 	0x04|SHIFT,      // A
@@ -207,9 +207,9 @@ const uint8_t _asciimap[128] =
 	0x1b,          // x
 	0x1c,          // y
 	0x1d,          // z
-	0x33|R_ALT,    // {
+	0x32|R_ALT,    // {
 	0x1e|R_ALT,    // |
-	0x34|R_ALT,    // }
+	0x31|R_ALT,    // }
 	0x21|R_ALT,    // ~
 	0				// DEL
 };
