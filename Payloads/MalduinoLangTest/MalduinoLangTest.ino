@@ -57,7 +57,7 @@ void setup()
   
   typeKey(KEY_RETURN);
   
-  Keyboard.print("TEST () {} [] | # ~ @  !  -_ ;, :. % & / = ? * ^  > < 1 ; ");
+  Keyboard.print("TEST () {} [] | # ~ @  !  -_ ;, :. % & \\/  'Q / = ? * ^  > < 1 ; ");
 
   typeKey(KEY_RETURN);
 
