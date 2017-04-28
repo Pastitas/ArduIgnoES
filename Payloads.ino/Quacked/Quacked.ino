@@ -13,23 +13,37 @@ void setup()
   // Begining the Keyboard stream
   Keyboard.begin();
   
- pinMode(3, INPUT_PULLUP);
-  while(digitalRead(3) != LOW){
-      delay(500);
-      Serial.print("Looping");
-      Serial.print('\n');
+  bool ARMADO = true;
+
+  if (!ARMADO){
+    pinMode(3, INPUT_PULLUP);
+    while(digitalRead(3) != LOW){
+        Serial.print("Looping");
+        Serial.print('\n');
+    }
   }
+   else{
+     pinMode(3, INPUT_PULLUP);
+    if(digitalRead(3) == LOW){
+      while(true){
+        Serial.print("Looping");
+        Serial.print('\n');
+      }
+    }
+   }
   
   // Wait 500ms
-  delay(500);
+  delay(2000);
 
   Keyboard.press(KEY_LEFT_GUI);
   Keyboard.press('d');
   Keyboard.releaseAll();
 
-  typeKey(KEY_LEFT_GUI);
-
-  Keyboard.print("https://i.imgflip.com/1dv8ac.jpg");
+  Keyboard.press(KEY_LEFT_GUI);
+  Keyboard.press('r');
+  Keyboard.releaseAll();
+  
+  Keyboard.print("http://dazedimg.dazedgroup.netdna-cnd.com/786/azure/dazed-prod/1150/0/1150228.jpg");
 
   typeKey(KEY_RETURN);
 
@@ -40,7 +54,7 @@ void setup()
   Keyboard.press('s');
   Keyboard.releaseAll();
 
-  Keyboard.print("%userprofile%\\Desktop\\QUACKED");
+  Keyboard.print("%userprofile%\\Desktop\\RICKROLL");
 
   typeKey(KEY_RETURN);
 
@@ -56,7 +70,7 @@ void setup()
   Keyboard.press('r');
   Keyboard.releaseAll();
 
-  Keyboard.print("%userprofile%\\Desktop\\QUACKED.png");
+  Keyboard.print("%userprofile%\\Desktop\\RICKROLL.jpg");
 
   typeKey(KEY_RETURN);
 
@@ -71,7 +85,7 @@ void setup()
 
   // sets the background, and closes.
   Keyboard.press(KEY_LEFT_GUI);
-  Keyboard.press('d');
+  Keyboard.press('r');
   Keyboard.releaseAll();
 
   typeKey(229);

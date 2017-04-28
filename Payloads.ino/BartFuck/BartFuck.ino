@@ -16,15 +16,29 @@ void setup()
 {
   // Begining the Keyboard stream
   Keyboard.begin();
-  
-  pinMode(3, INPUT_PULLUP);
-  while(digitalRead(3) != LOW){
-      Serial.print("Looping");
-      Serial.print('\n');
+  bool ARMADO = false;
+
+  if (!ARMADO){
+    pinMode(3, INPUT_PULLUP);
+    while(digitalRead(3) != LOW){
+        Serial.print("Looping");
+        Serial.print('\n');
+    }
   }
+   else{
+     pinMode(3, INPUT_PULLUP);
+    if(digitalRead(3) == LOW){
+      while(true){
+        Serial.print("Looping");
+        Serial.print('\n');
+      }
+    }
+   }
+
 
   // Wait 500ms
-  delay(500);
+  delay(5000);
+
 
   // Lock Me 0.3 - Script opens Notepad and types a message concerning locking the computer - by SurfKahuna (RJC)
   Keyboard.press(KEY_LEFT_GUI);
@@ -39,23 +53,23 @@ void setup()
 
   delay(300);
 
-  Keyboard.print("          , ,\\ ,'\\,'\\ ,'\\ ,\\ ,");
+  Keyboard.print("           , ,\\ ,'\\,'\\ ,'\\ ,\\ ,");
 
   typeKey(KEY_RETURN);
 
-  Keyboard.print("    ,  ,\\/ \\' `'     `   '  /|");
+  Keyboard.print("     ,  ,\\/ \\' `'     `   '  /|");
 
   typeKey(KEY_RETURN);
 
-  Keyboard.print("    |\\/                      |");
+  Keyboard.print("     |\\/                      |");
 
   typeKey(KEY_RETURN);
 
-  Keyboard.print("    :                        |");
+  Keyboard.print("     :                        |");
 
   typeKey(KEY_RETURN);
 
-  Keyboard.print("    :                        |");
+  Keyboard.print("     :                        |");
 
   typeKey(KEY_RETURN);
 
@@ -176,6 +190,8 @@ void setup()
   Keyboard.print("Please remember to lock your computer when you step away from your desk.");
 
   typeKey(KEY_RETURN);
+
+  typeKey(229);
 
   typeKey(KEY_RETURN);
 

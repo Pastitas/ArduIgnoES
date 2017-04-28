@@ -1,4 +1,4 @@
-/*
+ /*
  * Generated with <3 by Dckuino.js, an open source project !
  * 
  */
@@ -17,12 +17,25 @@ void setup()
 {
   Serial.begin(9600);
   
-  pinMode(3, INPUT_PULLUP);
-  while(digitalRead(3) != LOW){
-      delay(500);
-      Serial.print("Looping");
-      Serial.print('\n');
+  
+  bool ARMADO = false;
+
+  if (!ARMADO){
+    pinMode(3, INPUT_PULLUP);
+    while(digitalRead(3) != LOW){
+        Serial.print("Looping");
+        Serial.print('\n');
+    }
   }
+   else{
+     pinMode(3, INPUT_PULLUP);
+    if(digitalRead(3) == LOW){
+      while(true){
+        Serial.print("Looping");
+        Serial.print('\n');
+      }
+    }
+   }
 
   // Begining the Keyboard stream
   Keyboard.begin();
