@@ -18,14 +18,14 @@ String DEFAULT_FILE_NAME = "script.txt";
 
 void setup() {
 
-  if (!SD.begin(4)) {
+  if (!SD.begin(5)) {
     return;
   }
-  
+
   myFile = SD.open(DEFAULT_FILE_NAME);
   if (myFile) {
     Keyboard.begin();
-    
+
     String line = "";
     while (myFile.available()) {
       char m = myFile.read();
@@ -39,7 +39,7 @@ void setup() {
         }
     }
     Line(line);
-    
+
     myFile.close();
   } else {
   }
@@ -219,11 +219,9 @@ void Press(String b)
     else if (b.equals("SPACE"))
   {
     Keyboard.press(' ');
-  } 
+  }
 }
 
 void loop() {
   // nothing happens after setup
 }
-
-
