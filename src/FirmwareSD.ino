@@ -17,14 +17,31 @@ boolean first = true;
 String DEFAULT_FILE_NAME = "script.txt";
 
 void setup() {
+  String dip = ""; // Name of the file that will be opened
+
+  // Sets the given pins as switches for the dip switches
+  pinMode(7, INPUT_PULLUP);
+  pinMode(8, INPUT_PULLUP);
+  pinMode(9, INPUT_PULLUP);
+
+  // Switches are checked, dip string is contructed
+  if (digitalRead(7) == LOW){dip += "1";} else {dip += "0";}
+  if (digitalRead(8) == LOW){dip += "1";} else {dip += "0";}
+  if (digitalRead(9) == LOW){dip += "1";} else {dip += "0";}
+
+  dip += ".txt";
+  
+  Serial.print(dip+"\n");
 
   if (!SD.begin(4)) {
     return;
   }
 
-  myFile = SD.open(DEFAULT_FILE_NAME);
+  // Desired file is opened
+  myFile = SD.open(dip);
   if (myFile) {
     Keyboard.begin();
+    Serial.print("Executing  "+ dip+"\n");
 
     String line = "";
     while (myFile.available()) {
@@ -37,6 +54,7 @@ void setup() {
         {
           line += m;
         }
+        Serial.print(line+"\n");
     }
     Line(line);
 
@@ -58,7 +76,7 @@ void Line(String l)
   {
     Keyboard.print(l.substring(space_1 + 1));
   }
-  else if (l.substring(0,space_1) == "DELAY")
+  else if ((l.substring(0,space_1) == "DELAY") || (l.substring(0,space_1) == "DELAY"))
   {
     int delaytime = l.substring(space_1 + 1).toInt();
     delay(delaytime);
@@ -112,7 +130,7 @@ void Press(String b)
   {
     Keyboard.press(KEY_LEFT_ALT);
   }
-    else if (b.equals("GUI"))
+    else if ((b.equals("GUI")) || (b.equals("WINDOWS")))
   {
     Keyboard.press(KEY_LEFT_GUI);
   }
@@ -215,10 +233,6 @@ void Press(String b)
     else if (b.equals("F12"))
   {
     Keyboard.press(KEY_F12);
-  }
-    else if (b.equals("SPACE"))
-  {
-    Keyboard.press(' ');
   }
 }
 

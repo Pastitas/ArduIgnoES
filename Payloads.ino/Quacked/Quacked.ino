@@ -12,7 +12,7 @@ void setup()
 {
   // Begining the Keyboard stream
   Keyboard.begin();
-  
+
   bool ARMADO = true;
 
   if (!ARMADO){
@@ -31,7 +31,7 @@ void setup()
       }
     }
    }
-  
+
   // Wait 500ms
   delay(2000);
 
@@ -42,7 +42,7 @@ void setup()
   Keyboard.press(KEY_LEFT_GUI);
   Keyboard.press('r');
   Keyboard.releaseAll();
-  
+
   Keyboard.print("http://dazedimg.dazedgroup.netdna-cnd.com/786/azure/dazed-prod/1150/0/1150228.jpg");
 
   typeKey(KEY_RETURN);
