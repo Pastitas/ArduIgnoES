@@ -30,8 +30,8 @@ void setup() {
   if (digitalRead(9) == LOW){dip += "1";} else {dip += "0";}
 
   dip += ".txt";
-  
-  Serial.print(dip+"\n");
+
+  // Serial.print(dip+"\n");
 
   if (!SD.begin(4)) {
     return;
@@ -54,7 +54,7 @@ void setup() {
         {
           line += m;
         }
-        Serial.print(line+"\n");
+        //Serial.print(line+"\n");
     }
     Line(line);
 
